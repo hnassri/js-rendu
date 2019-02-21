@@ -4,32 +4,36 @@ let number = 0;
 let aude = 0;
 let maj = 0;
 let underscore = 0;
-
+let maj2 = 0;
 handle.forEach(name => {
   if (name.search(/\d/) !== -1) {
     number++;
   }
-  if (name.search(/aude/) !== -1) {
+  if (name.search(/aude/i) !== -1) {
     aude++;
   }
   if (name[1].search(/[A-Z]/) !== -1) {
     maj++;
   }
-  if (name.search(/_/) !== -1) {
-    underscore++;
+  name.split("").forEach(num => {
+    if (num.match(/_/)) {
+      underscore++;
+    }
   }
-  // if (name.search(/@epenser/) !== -1) {
-  //   position = name;
-  // }
+  )
+  if (name.match(/[A-Z]/)) {
+    maj2++;
+  }
 })
 
-handle.sort();
+// handle.sort();
 
 console.log("le nombre de handle contenant un numéro est " + number);
 console.log("le nombre de handle contenant le prénom aude est " + aude);
-console.log("le nombre de handle contenant une majuscule est " + maj);
-console.log("le nombre de handle contenant un underscore est " + underscore);
-console.log("la position de epenser dans l'array est " + handle.lastIndexOf("@epenser") + "(ne pas oubier que l'array a été classée par ordre alphabétique)");
+console.log("le nombre de handle ayant en première lettre une majuscule est " + maj);
+console.log("le nombre de handle ayant une majuscule est " + maj2);
+console.log("le nombre de underscore dans l'array est " + underscore);
+console.log("la position de epenser dans l'array est " + handle.indexOf("@epenser") + "(ne pas oubier que l'array a été classée par ordre alphabétique)");
 for(let num = 0; num <= 50; num++){
   handle.sort(function(a, b) {
     return a.length - b.length;
