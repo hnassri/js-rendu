@@ -9,24 +9,51 @@ let priceDevise = ["$6558.07", "$468.95", "$0.487526", "$762.84", "$8.86", "$85.
 let hashDevise = [];
 console.log(hashDevise);
 let x = 0;
-
+var newPrice = [];
+var arrayLength = priceDevise.length;
+for(let i = 0; i < arrayLength; i++){
+  newPrice.push(Number(priceDevise[i].substr(1)))
+}
+console.log(newPrice)
 nameDevise.forEach(key => {
   let hash = {}
   hash.name = key;
-  hash.value = priceDevise[x];
+  hash.value = newPrice[x];
   hashDevise.push(hash);
   x++;
 })
 x = 0;
 let y = "";
-hashDevise.forEach(hash => {
-  Number(hash.value);
-  console.log(hash.value)
-  // Number(hash.value) 
-  // if (hash.value >= x) {
-  //   x = hash.value;
-  //   y = hash.name;
-  // }
+let coinName = 0;
+hashDevise.forEach(hash => { 
+  if (hash.value >= x) {
+    x = hash.value;
+    y = hash.name;
+  }
+
+  if (hash.name.match(/coin/i)) {
+    coinName++;
+  }
 
 })
-console.log("la devise est " + y + " avec une valeur de " + x)
+let z = x;
+let f = "";
+let val = 0;
+let n = "";
+hashDevise.forEach(hash => { 
+  if (hash.value <= z) {
+    z = hash.value;
+    f = hash.name;
+  }
+  if (hash.value <= 6000) {
+    console.log("Devise dont le cours est inférieur à 6000: " + hash.name);
+    if (hash.value >= val) {
+      val = hash.value
+      n = hash.name
+    }
+  }
+})
+console.log("la devise avec la plus haute valeur est " + y + " avec une valeur de " + x)
+console.log("la devise avec la plus faible valeur est " + f + " avec une valeur de " + z)
+console.log("Le nombre de crypto contenant le mot coin est " + coinName)
+console.log("La devise ne dépassant pas 6000 dollars avec la plus grosse valeur est " + n + " avec une valeur de " + val)
